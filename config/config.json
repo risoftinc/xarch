@@ -1,0 +1,312 @@
+{
+  "message_templates": {
+    "success": {
+      "key": "success",
+      "template": "Operation completed successfully",
+      "code_mappings": {
+        "web-api": 200,
+        "grpc": 0
+      }
+    },
+    "created": {
+      "key": "created",
+      "template": "Resource created successfully",
+      "code_mappings": {
+        "web-api": 201,
+        "grpc": 0
+      }
+    },
+    "updated": {
+      "key": "updated",
+      "template": "Resource updated successfully",
+      "code_mappings": {
+        "web-api": 200,
+        "grpc": 0
+      }
+    },
+    "deleted": {
+      "key": "deleted",
+      "template": "Resource deleted successfully",
+      "code_mappings": {
+        "web-api": 200,
+        "grpc": 0
+      }
+    },
+    "retrieved": {
+      "key": "retrieved",
+      "template": "Data retrieved successfully",
+      "code_mappings": {
+        "web-api": 200,
+        "grpc": 0
+      }
+    },
+    "data_retrieved": {
+      "key": "data_retrieved",
+      "template": "Successfully retrieved $count records",
+      "code_mappings": {
+        "web-api": 200,
+        "grpc": 0
+      }
+    },
+    "data_created": {
+      "key": "data_created",
+      "template": "Successfully created $count items",
+      "code_mappings": {
+        "web-api": 201,
+        "grpc": 0
+      }
+    },
+    "data_updated": {
+      "key": "data_updated",
+      "template": "Successfully updated $count items",
+      "code_mappings": {
+        "web-api": 200,
+        "grpc": 0
+      }
+    },
+    "data_deleted": {
+      "key": "data_deleted",
+      "template": "Successfully deleted $count items",
+      "code_mappings": {
+        "web-api": 200,
+        "grpc": 0
+      }
+    },
+    "bad_request": {
+      "key": "bad_request",
+      "template": "Bad request",
+      "code_mappings": {
+        "web-api": 400,
+        "grpc": 3
+      }
+    },
+    "unauthorized": {
+      "key": "unauthorized",
+      "template": "Unauthorized access",
+      "code_mappings": {
+        "web-api": 401,
+        "grpc": 16
+      }
+    },
+    "forbidden": {
+      "key": "forbidden",
+      "template": "Access forbidden",
+      "code_mappings": {
+        "web-api": 403,
+        "grpc": 7
+      }
+    },
+    "not_found": {
+      "key": "not_found",
+      "template": "Resource not found",
+      "code_mappings": {
+        "web-api": 404,
+        "grpc": 5
+      }
+    },
+    "method_not_allowed": {
+      "key": "method_not_allowed",
+      "template": "Method not allowed",
+      "code_mappings": {
+        "web-api": 405,
+        "grpc": 12
+      }
+    },
+    "conflict": {
+      "key": "conflict",
+      "template": "Resource already exists",
+      "code_mappings": {
+        "web-api": 409,
+        "grpc": 6
+      }
+    },
+    "too_many_requests": {
+      "key": "too_many_requests",
+      "template": "Too many requests",
+      "code_mappings": {
+        "web-api": 429,
+        "grpc": 8
+      }
+    },
+    "validation_failed": {
+      "key": "validation_failed",
+      "template": "Validation failed for field: $field",
+      "code_mappings": {
+        "web-api": 422,
+        "grpc": 3
+      }
+    },
+    "field_required": {
+      "key": "field_required",
+      "template": "Field '$field' is required",
+      "code_mappings": {
+        "web-api": 422,
+        "grpc": 3
+      }
+    },
+    "field_invalid": {
+      "key": "field_invalid",
+      "template": "Field '$field' is invalid",
+      "code_mappings": {
+        "web-api": 422,
+        "grpc": 3
+      }
+    },
+    "field_too_long": {
+      "key": "field_too_long",
+      "template": "Field '$field' exceeds maximum length of $max characters",
+      "code_mappings": {
+        "web-api": 422,
+        "grpc": 3
+      }
+    },
+    "field_too_short": {
+      "key": "field_too_short",
+      "template": "Field '$field' must be at least $min characters",
+      "code_mappings": {
+        "web-api": 422,
+        "grpc": 3
+      }
+    },
+    "resource_not_found": {
+      "key": "resource_not_found",
+      "template": "Resource '$resource' with ID '$id' not found",
+      "code_mappings": {
+        "web-api": 404,
+        "grpc": 5
+      }
+    },
+    "resource_already_exists": {
+      "key": "resource_already_exists",
+      "template": "Resource '$resource' with '$field' '$value' already exists",
+      "code_mappings": {
+        "web-api": 409,
+        "grpc": 6
+      }
+    },
+    "resource_created": {
+      "key": "resource_created",
+      "template": "Resource '$resource' created successfully with ID '$id'",
+      "code_mappings": {
+        "web-api": 201,
+        "grpc": 0
+      }
+    },
+    "resource_updated": {
+      "key": "resource_updated",
+      "template": "Resource '$resource' with ID '$id' updated successfully",
+      "code_mappings": {
+        "web-api": 200,
+        "grpc": 0
+      }
+    },
+    "user_not_found": {
+      "key": "user_not_found",
+      "template": "User with '$field' '$value' not found",
+      "code_mappings": {
+        "web-api": 404,
+        "grpc": 5
+      }
+    },
+    "user_created": {
+      "key": "user_created",
+      "template": "User '$username' created successfully",
+      "code_mappings": {
+        "web-api": 201,
+        "grpc": 0
+      }
+    },
+    "user_updated": {
+      "key": "user_updated",
+      "template": "User '$username' updated successfully",
+      "code_mappings": {
+        "web-api": 200,
+        "grpc": 0
+      }
+    },
+    "user_deleted": {
+      "key": "user_deleted",
+      "template": "User '$username' deleted successfully",
+      "code_mappings": {
+        "web-api": 200,
+        "grpc": 0
+      }
+    },
+    "invalid_credentials": {
+      "key": "invalid_credentials",
+      "template": "Invalid username or password",
+      "code_mappings": {
+        "web-api": 401,
+        "grpc": 16
+      }
+    },
+    "token_expired": {
+      "key": "token_expired",
+      "template": "Authentication token has expired",
+      "code_mappings": {
+        "web-api": 401,
+        "grpc": 16
+      }
+    },
+    "token_invalid": {
+      "key": "token_invalid",
+      "template": "Invalid authentication token",
+      "code_mappings": {
+        "web-api": 401,
+        "grpc": 16
+      }
+    },
+    "internal_server_error": {
+      "key": "internal_server_error",
+      "template": "Internal server error",
+      "code_mappings": {
+        "web-api": 500,
+        "grpc": 13
+      }
+    },
+    "service_unavailable": {
+      "key": "service_unavailable",
+      "template": "Service temporarily unavailable",
+      "code_mappings": {
+        "web-api": 503,
+        "grpc": 14
+      }
+    },
+    "database_error": {
+      "key": "database_error",
+      "template": "Database operation failed",
+      "code_mappings": {
+        "web-api": 500,
+        "grpc": 13
+      }
+    },
+    "timeout": {
+      "key": "timeout",
+      "template": "Request timeout",
+      "code_mappings": {
+        "web-api": 408,
+        "grpc": 4
+      }
+    },
+    "welcome_message": {
+      "key": "welcome_message",
+      "template": "Welcome $name! Your account was created on $date",
+      "code_mappings": {
+        "web-api": 200,
+        "grpc": 0
+      }
+    }
+  },
+  "default_language": "en",
+  "languages": ["en", "id"],
+  "translation_source": {
+    "en": {
+      "method": "file",
+      "path": "./config/translations/en.json"
+    },
+    "id": {
+      "method": "file",
+      "path": "./config/translations/id.json"
+    }
+  }
+}

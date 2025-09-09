@@ -1,0 +1,37 @@
+# Elsa - Engineer's Little Smart Assistant
+# This file defines custom commands for your project
+# Commands can be run using: elsa command_name or elsa run command_name
+
+# Install elsa cli
+install-tools:
+	go install github.com/risoftinc/elsa/cmd/elsa@latest
+
+# Build the project
+build:
+	go build -o bin/app .
+
+# Run tests
+test:
+	go test ./...
+
+# Clean build artifacts
+clean:
+	rm -rf bin/
+	go clean
+
+# Install dependencies
+deps:
+	go mod download
+	go mod tidy
+
+# Start the application
+start:
+	go run .
+
+# Format code
+fmt:
+	go fmt ./...
+	go vet ./...
+
+seed:
+	go run cmd/seeder/main.go -type=all
