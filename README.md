@@ -1,10 +1,11 @@
-# XArch - Go Microservice Architecture
+# XArch - Go Project Base Code
 
-A modern, scalable Go microservice application built with clean architecture principles, supporting both HTTP REST API and gRPC protocols.
+A ready-to-use Go project template built with clean architecture principles, supporting both HTTP REST API and gRPC protocols. Perfect as a starting point for any Go project - from simple web applications to complex microservices.
 
 ## 🚀 Features
 
-- **Dual Protocol Support**: HTTP REST API and gRPC services
+- **Ready-to-Use**: Complete project structure with all essential components
+- **Dual Protocol Support**: HTTP REST API and gRPC services (use what you need)
 - **Clean Architecture**: Domain-driven design with clear separation of concerns
 - **Multi-Database Support**: PostgreSQL, MySQL, and SQLite
 - **Additional Storage**: MongoDB and Redis support
@@ -17,6 +18,7 @@ A modern, scalable Go microservice application built with clean architecture pri
 - **Configuration Management**: Environment-based configuration
 - **Validation**: Input validation with custom validators
 - **Security**: Password hashing with bcrypt
+- **Flexible**: Easily customizable for any Go project type
 
 ## 🏗️ Architecture
 
@@ -66,7 +68,7 @@ git clone https://github.com/risoftinc/xarch.git
 cd xarch
 ```
 
-#### Option 2: Using Elsa CLI Tool
+#### Option 2: Using Elsa CLI Tool (Recommended)
 First, install the Elsa CLI tool:
 ```bash
 go install github.com/risoftinc/elsa/cmd/elsa@latest
@@ -81,6 +83,8 @@ elsa new xarch[@version] <project-name> --module=<your-module>
 ```bash
 elsa new xarch@latest my-project --module=risoftinc.com/my-project
 ```
+
+This will create a new project with all the base code structure ready for your Go application.
 
 ### 2. Install Dependencies
 
@@ -184,6 +188,8 @@ go run main.go
 The application will start both HTTP and gRPC servers:
 - HTTP Server: `http://localhost:9000`
 - gRPC Server: `localhost:9001`
+
+**Note:** You can disable either server by modifying the configuration or removing the respective server initialization code if you only need one protocol.
 
 ## 📡 API Endpoints
 
@@ -353,9 +359,11 @@ For support and questions:
 ## 🔄 Version History
 
 - **v1.0.0**: Initial release with HTTP and gRPC support
+- Ready-to-use base code for all Go projects
 - Basic health monitoring
 - Multi-database support
 - Internationalization support
+- Clean architecture implementation
 
 ---
 
