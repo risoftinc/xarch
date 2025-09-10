@@ -4,6 +4,7 @@ import (
 	"context"
 	"strings"
 
+	"github.com/risoftinc/gologger"
 	healthModels "github.com/risoftinc/xarch/domain/models/health"
 	healthRepositories "github.com/risoftinc/xarch/domain/repositories/health"
 )
@@ -13,14 +14,17 @@ type (
 		HealthMetric(ctx context.Context) (*healthModels.HealthMetric, error)
 	}
 	HealthServices struct {
+		logger             gologger.Logger
 		healthRepositories healthRepositories.IHealthRepositories
 	}
 )
 
 func NewHealthService(
+	logger gologger.Logger,
 	healthRepositories healthRepositories.IHealthRepositories,
 ) IHealthServices {
 	return &HealthServices{
+		logger:             logger,
 		healthRepositories: healthRepositories,
 	}
 }
@@ -34,14 +38,11 @@ func (svc HealthServices) HealthMetric(ctx context.Context) (*healthModels.Healt
 	databaseHealth, err := svc.healthRepositories.DatabaseHealth(ctx)
 	if err != nil {
 		metric.Status["database"] = "disconnected"
-		metric.DB = map[string]interface{}{
-			"error": err.Error(),
-		}
+
+		return metric, err
 	} else {
 		metric.Status["database"] = "connected"
-		metric.DB = map[string]interface{}{
-			"stats": databaseHealth,
-		}
+		metric.DB = databaseHealth
 	}
 
 	return metric, nil

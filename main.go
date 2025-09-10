@@ -2,10 +2,13 @@ package main
 
 import (
 	"log"
+	"sync"
 
 	"github.com/risoftinc/gologger"
 	"github.com/risoftinc/xarch/config"
 	"github.com/risoftinc/xarch/driver"
+
+	grpc "github.com/risoftinc/xarch/infrastructure/grpc/engine"
 	http "github.com/risoftinc/xarch/infrastructure/http/engine"
 )
 
@@ -46,20 +49,33 @@ func main() {
 	defer responseManager.Stop()
 
 	// Initialize logger with config
-	log := gologger.NewLoggerWithConfig(gologger.LoggerConfig{
+	logger := gologger.NewLoggerWithConfig(gologger.LoggerConfig{
 		OutputMode:   cfg.Logger.OutputMode,
 		LogLevel:     cfg.Logger.LogLevel,
 		LogDir:       cfg.Logger.LogDir,
 		RequestIDKey: "traceID",
 	})
-	defer log.Close()
+	defer logger.Close()
 
-	// Start HTTP server with graceful shutdown
+	// Simple approach - just start both servers and wait for signal
+	var wg sync.WaitGroup
+
+	// Start HTTP server
 	http.Start(http.App{
-		Config: cfg,
-		Logger: log,
-		DB:     db,
-		// ResponseManager: responseManager, -> If use sync config manager
+		Config:          cfg,
+		Logger:          logger,
+		DB:              db,
 		ResponseManager: responseManager.GetConfig(),
-	})
+	}, &wg)
+
+	// Start GRPC server
+	grpc.StartGRPC(grpc.App{
+		Config:          cfg,
+		Logger:          logger,
+		DB:              db,
+		ResponseManager: responseManager.GetConfig(),
+	}, &wg)
+
+	// Wait for both servers to complete
+	wg.Wait()
 }

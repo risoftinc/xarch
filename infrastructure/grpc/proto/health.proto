@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package health;
+
+option go_package = "github.com/risoftinc/xarch/proto";
+
+// Health service definition
+service HealthService {
+  // Get health metrics
+  rpc GetHealthMetric(HealthMetricRequest) returns (HealthMetricResponse);
+}
+
+// Request message for health metric
+message HealthMetricRequest {
+  // Empty request for now, can be extended later
+}
+
+// Response message for health metric
+message HealthMetricResponse {
+  // Status code (HTTP-like status codes)
+  int32 status = 1;
+  
+  // Response message
+  string message = 2;
+  
+  // Health metric data
+  HealthMetricData data = 3;
+  
+  // Error information (if any)
+  string error = 4;
+}
+
+// Health metric data structure
+message HealthMetricData {
+  // Status map for different services
+  map<string, string> status = 1;
+  
+  // Database information
+  DatabaseInfo database = 2;
+}
+
+// Database information
+message DatabaseInfo {
+  // Database stats or error message
+  int32 MaxOpenConnections = 1;
+
+  int32 OpenConnections = 2;
+  int32 InUse = 3;
+  int32 Idle = 4;
+  
+  int32 WaitCount = 5;
+  int32 WaitDuration = 6;
+  int32 MaxIdleClosed = 7;
+  int32 MaxIdleTimeClosed = 8;
+  int32 MaxLifetimeClosed = 9;
+}
+

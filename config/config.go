@@ -11,6 +11,7 @@ import (
 type (
 	Config struct {
 		Http            HttpServer
+		Grpc            GrpcServer
 		Database        DatabaseConfig
 		MongoDB         MongoDBConfig
 		Redis           RedisConfig
@@ -19,6 +20,12 @@ type (
 	}
 
 	HttpServer struct {
+		Server string
+		Port   int
+		URL    string
+	}
+
+	GrpcServer struct {
 		Server string
 		Port   int
 		URL    string
@@ -107,6 +114,7 @@ func Configuration() Config {
 
 	cfg := Config{
 		Http:            loadHttpServer(),
+		Grpc:            loadGrpcServer(),
 		Database:        loadDatabaseConfig(),
 		MongoDB:         loadMongoDBConfig(),
 		Redis:           loadRedisConfig(),
@@ -134,6 +142,16 @@ func loadHttpServer() HttpServer {
 		cfg.URL += fmt.Sprintf(":%d", cfg.Port)
 	}
 	cfg.URL += "/"
+
+	return cfg
+}
+
+func loadGrpcServer() GrpcServer {
+	var cfg GrpcServer
+
+	cfg.Server = env.GetEnv("GRPC_SERVER", "localhost")
+	cfg.Port = env.GetEnv("GRPC_PORT", 9001)
+	cfg.URL = fmt.Sprintf("%s:%d", cfg.Server, cfg.Port)
 
 	return cfg
 }
