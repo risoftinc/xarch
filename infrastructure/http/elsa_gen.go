@@ -18,7 +18,7 @@ import (
 	mid "github.com/risoftinc/xarch/infrastructure/http/middleware"
 )
 
-// This file generated from dep_manager.go at 2025-09-10T12:36:30+07:00
+// This file generated from dep_manager.go at 2025-09-10T12:55:04+07:00
 
 type Dependencies struct {
 	Middlewares    mid.IContextMiddleware

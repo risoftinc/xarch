@@ -1,7 +1,7 @@
 //go:build elsabuild
 // +build elsabuild
 
-package http
+package grpc
 
 import (
 	"github.com/risoftinc/elsa"

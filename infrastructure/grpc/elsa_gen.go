@@ -4,7 +4,7 @@
 //go:build !elsabuild
 // +build !elsabuild
 
-package http
+package grpc
 
 import (
 	"github.com/risoftinc/elsa"
@@ -18,7 +18,7 @@ import (
 	mid "github.com/risoftinc/xarch/infrastructure/grpc/middleware"
 )
 
-// This file generated from dep_manager.go at 2025-09-10T12:36:26+07:00
+// This file generated from dep_manager.go at 2025-09-10T12:55:00+07:00
 
 type Dependencies struct {
 	Middlewares    mid.IContextMiddleware
