@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package health;
 
-option go_package = "github.com/risoftinc/xarch/proto";
+option go_package = "go.risoftinc.com/xarch/proto";
 
 // Health service definition
 service HealthService {

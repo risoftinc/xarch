@@ -4,9 +4,9 @@ import (
 	"context"
 
 	"github.com/google/uuid"
-	"github.com/risoftinc/gologger"
-	"github.com/risoftinc/goresponse"
-	"github.com/risoftinc/xarch/constant"
+	"go.risoftinc.com/gologger"
+	"go.risoftinc.com/goresponse"
+	"go.risoftinc.com/xarch/constant"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 )

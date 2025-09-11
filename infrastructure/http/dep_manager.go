@@ -4,13 +4,13 @@
 package http
 
 import (
-	"github.com/risoftinc/gologger"
-	"github.com/risoftinc/xarch/config"
-	healthRepo "github.com/risoftinc/xarch/domain/repositories/health"
-	healthSvc "github.com/risoftinc/xarch/domain/services/health"
-	healthHandler "github.com/risoftinc/xarch/infrastructure/http/handler/health"
-	mid "github.com/risoftinc/xarch/infrastructure/http/middleware"
 	"go.risoftinc.com/elsa"
+	"go.risoftinc.com/gologger"
+	"go.risoftinc.com/xarch/config"
+	healthRepo "go.risoftinc.com/xarch/domain/repositories/health"
+	healthSvc "go.risoftinc.com/xarch/domain/services/health"
+	healthHandler "go.risoftinc.com/xarch/infrastructure/http/handler/health"
+	mid "go.risoftinc.com/xarch/infrastructure/http/middleware"
 	"gorm.io/gorm"
 )
 

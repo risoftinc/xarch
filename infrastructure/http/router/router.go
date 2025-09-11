@@ -3,8 +3,8 @@ package router
 import (
 	"github.com/labstack/echo/v4"
 	echoMiddleware "github.com/labstack/echo/v4/middleware"
-	dep "github.com/risoftinc/xarch/infrastructure/http"
-	"github.com/risoftinc/xarch/utils/validator"
+	dep "go.risoftinc.com/xarch/infrastructure/http"
+	"go.risoftinc.com/xarch/utils/validator"
 )
 
 func Routers(dep *dep.Dependencies) *echo.Echo {

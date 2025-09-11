@@ -4,12 +4,12 @@ import (
 	"log"
 	"sync"
 
-	"github.com/risoftinc/gologger"
-	"github.com/risoftinc/xarch/config"
-	"github.com/risoftinc/xarch/driver"
+	"go.risoftinc.com/gologger"
+	"go.risoftinc.com/xarch/config"
+	"go.risoftinc.com/xarch/driver"
 
-	grpc "github.com/risoftinc/xarch/infrastructure/grpc/engine"
-	http "github.com/risoftinc/xarch/infrastructure/http/engine"
+	grpc "go.risoftinc.com/xarch/infrastructure/grpc/engine"
+	http "go.risoftinc.com/xarch/infrastructure/http/engine"
 )
 
 func main() {

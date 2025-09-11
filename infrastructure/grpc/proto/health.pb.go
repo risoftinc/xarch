@@ -324,7 +324,7 @@ const file_infrastructure_grpc_proto_health_proto_rawDesc = "" +
 	"\x11MaxIdleTimeClosed\x18\b \x01(\x05R\x11MaxIdleTimeClosed\x12,\n" +
 	"\x11MaxLifetimeClosed\x18\t \x01(\x05R\x11MaxLifetimeClosed2]\n" +
 	"\rHealthService\x12L\n" +
-	"\x0fGetHealthMetric\x12\x1b.health.HealthMetricRequest\x1a\x1c.health.HealthMetricResponseB\"Z github.com/risoftinc/xarch/protob\x06proto3"
+	"\x0fGetHealthMetric\x12\x1b.health.HealthMetricRequest\x1a\x1c.health.HealthMetricResponseB\x1eZ\x1cgo.risoftinc.com/xarch/protob\x06proto3"
 
 var (
 	file_infrastructure_grpc_proto_health_proto_rawDescOnce sync.Once

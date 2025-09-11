@@ -8,7 +8,7 @@ import (
 
 	"github.com/redis/go-redis/v9"
 
-	"github.com/risoftinc/xarch/config"
+	"go.risoftinc.com/xarch/config"
 )
 
 // ConnectRedis creates a Redis connection

@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/risoftinc/gologger"
-	healthServices "github.com/risoftinc/xarch/domain/services/health"
-	"github.com/risoftinc/xarch/infrastructure/http/entities"
+	"go.risoftinc.com/gologger"
+	healthServices "go.risoftinc.com/xarch/domain/services/health"
+	"go.risoftinc.com/xarch/infrastructure/http/entities"
 )
 
 type (

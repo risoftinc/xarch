@@ -1,8 +1,8 @@
 package router
 
 import (
-	dep "github.com/risoftinc/xarch/infrastructure/grpc"
-	healthpb "github.com/risoftinc/xarch/infrastructure/grpc/proto"
+	dep "go.risoftinc.com/xarch/infrastructure/grpc"
+	healthpb "go.risoftinc.com/xarch/infrastructure/grpc/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
