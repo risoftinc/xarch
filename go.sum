@@ -114,8 +114,8 @@ go.risoftinc.com/elsa v0.0.0-20250911163010-0cea0c27cca2 h1:f410E2Jn6r4QcErQVEL5
 go.risoftinc.com/elsa v0.0.0-20250911163010-0cea0c27cca2/go.mod h1:b6krpIJ+txu4xCeJRWeeAapa0M+F5TbooEtj4Q23MqY=
 go.risoftinc.com/goenv v1.1.1 h1:YuI4kpcFPQf5S9oAr4MP0ahgnQyO7s2QyPNVFmO9x7w=
 go.risoftinc.com/goenv v1.1.1/go.mod h1:H2jx49qNhrIleRSW2Cd58OqcQdCtSNBDtY4t92Ih6AE=
-go.risoftinc.com/gologger v1.2.0 h1:uGelCeKuTn0sh7erfrN8HxkaumrgB8e6Lx/fejTFM20=
-go.risoftinc.com/gologger v1.2.0/go.mod h1:PF5C26/tUwBhewmoahiQHNeUVVXsbeA4oLzszMioiZg=
+go.risoftinc.com/gologger v1.3.0 h1:BsFKvK46rwoiyaxCe0GAo3mbA1/dO2spSkNt1NFx+fw=
+go.risoftinc.com/gologger v1.3.0/go.mod h1:PF5C26/tUwBhewmoahiQHNeUVVXsbeA4oLzszMioiZg=
 go.risoftinc.com/goresponse v1.0.0 h1:kA0n23nNrccX0ev94pOd4ia5Exb8b1jo8Ls6WC8zFPA=
 go.risoftinc.com/goresponse v1.0.0/go.mod h1:NxP755H8rILZ7fGuqW0+I4ZtKGgBnzX7YPPpJoJ3O2U=
 go.risoftinc.com/goseeder v1.2.0 h1:9+UnDDmh0ulZqUEVsGaPlQPTs9+dwTDDwClbfz1tRkA=

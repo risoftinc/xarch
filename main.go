@@ -54,6 +54,7 @@ func main() {
 		LogLevel:     cfg.Logger.LogLevel,
 		LogDir:       cfg.Logger.LogDir,
 		RequestIDKey: "traceID",
+		ShowCaller:   true,
 	})
 	defer logger.Close()
 

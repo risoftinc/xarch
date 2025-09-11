@@ -13,7 +13,7 @@ require (
 	go.mongodb.org/mongo-driver v1.17.1
 	go.risoftinc.com/elsa v0.0.0-20250911163010-0cea0c27cca2
 	go.risoftinc.com/goenv v1.1.1
-	go.risoftinc.com/gologger v1.2.0
+	go.risoftinc.com/gologger v1.3.0
 	go.risoftinc.com/goresponse v1.0.0
 	go.risoftinc.com/goseeder v1.2.0
 	golang.org/x/crypto v0.41.0
