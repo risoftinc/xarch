@@ -71,7 +71,7 @@ cd xarch
 #### Option 2: Using Elsa CLI Tool (Recommended)
 First, install the Elsa CLI tool:
 ```bash
-go install github.com/risoftinc/elsa/cmd/elsa@latest
+go install go.risoftinc.com/elsa/cmd/elsa@latest
 ```
 
 Then create a new project using XArch template:

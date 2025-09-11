@@ -4,13 +4,13 @@
 package grpc
 
 import (
-	"github.com/risoftinc/elsa"
 	"github.com/risoftinc/gologger"
 	"github.com/risoftinc/xarch/config"
 	healthRepo "github.com/risoftinc/xarch/domain/repositories/health"
 	healthSvc "github.com/risoftinc/xarch/domain/services/health"
 	healthHandler "github.com/risoftinc/xarch/infrastructure/grpc/handler/health"
 	mid "github.com/risoftinc/xarch/infrastructure/grpc/middleware"
+	"go.risoftinc.com/elsa"
 	"gorm.io/gorm"
 )
 

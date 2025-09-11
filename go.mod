@@ -10,7 +10,6 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/labstack/echo/v4 v4.13.4
 	github.com/redis/go-redis/v9 v9.7.0
-	github.com/risoftinc/elsa v0.0.0-20250904102412-462fc4684bb7
 	github.com/risoftinc/goenv v1.1.0
 	github.com/risoftinc/gologger v1.1.0
 	github.com/risoftinc/goresponse v0.0.0-20250908103302-faef7b67f336
@@ -55,6 +54,7 @@ require (
 	github.com/xdg-go/scram v1.1.2 // indirect
 	github.com/xdg-go/stringprep v1.0.4 // indirect
 	github.com/youmark/pkcs8 v0.0.0-20240726163527-a2c0da244d78 // indirect
+	go.risoftinc.com/elsa v0.0.0-20250911163010-0cea0c27cca2 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
 	golang.org/x/net v0.43.0 // indirect
