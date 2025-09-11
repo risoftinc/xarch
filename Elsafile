@@ -4,7 +4,7 @@
 
 # Install elsa cli
 install-tools:
-	go install github.com/risoftinc/elsa/cmd/elsa@latest
+	go install go.risoftinc.com/elsa/cmd/elsa@latest
 
 # Build the project
 build:
@@ -24,8 +24,8 @@ deps:
 	go mod download
 	go mod tidy
 
-# Start the application
-start:
+# Run the application
+run:
 	go run .
 
 # Format code
