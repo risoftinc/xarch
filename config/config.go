@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	env "github.com/risoftinc/goenv"
+	env "go.risoftinc.com/goenv"
 )
 
 type (

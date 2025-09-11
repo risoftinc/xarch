@@ -10,7 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 
-	"github.com/risoftinc/xarch/config"
+	"go.risoftinc.com/xarch/config"
 )
 
 // buildMongoURI builds MongoDB URI with authentication if provided

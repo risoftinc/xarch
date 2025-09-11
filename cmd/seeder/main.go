@@ -3,10 +3,10 @@ package main
 import (
 	"log"
 
-	"github.com/risoftinc/goseeder"
-	"github.com/risoftinc/xarch/config"
-	"github.com/risoftinc/xarch/database/seeders"
-	"github.com/risoftinc/xarch/driver"
+	"go.risoftinc.com/goseeder"
+	"go.risoftinc.com/xarch/config"
+	"go.risoftinc.com/xarch/database/seeders"
+	"go.risoftinc.com/xarch/driver"
 )
 
 func main() {

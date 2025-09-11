@@ -3,8 +3,8 @@ package driver
 import (
 	"log"
 
-	"github.com/risoftinc/goresponse"
-	"github.com/risoftinc/xarch/config"
+	"go.risoftinc.com/goresponse"
+	"go.risoftinc.com/xarch/config"
 )
 
 func ResponseManager(cfg config.ResponseManager) (*goresponse.ResponseConfig, error) {

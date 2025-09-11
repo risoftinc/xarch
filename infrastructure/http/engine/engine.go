@@ -10,11 +10,11 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/risoftinc/gologger"
-	"github.com/risoftinc/goresponse"
-	"github.com/risoftinc/xarch/config"
-	dep "github.com/risoftinc/xarch/infrastructure/http"
-	"github.com/risoftinc/xarch/infrastructure/http/router"
+	"go.risoftinc.com/gologger"
+	"go.risoftinc.com/goresponse"
+	"go.risoftinc.com/xarch/config"
+	dep "go.risoftinc.com/xarch/infrastructure/http"
+	"go.risoftinc.com/xarch/infrastructure/http/router"
 	"gorm.io/gorm"
 )
 

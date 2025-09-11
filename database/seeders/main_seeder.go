@@ -3,7 +3,7 @@ package seeders
 import (
 	"log"
 
-	"github.com/risoftinc/goseeder"
+	"go.risoftinc.com/goseeder"
 	"gorm.io/gorm"
 )
 

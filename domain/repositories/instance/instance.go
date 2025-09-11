@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/risoftinc/xarch/constant"
+	"go.risoftinc.com/xarch/constant"
 	"gorm.io/gorm"
 )
 

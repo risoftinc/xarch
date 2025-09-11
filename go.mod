@@ -1,4 +1,4 @@
-module github.com/risoftinc/xarch
+module go.risoftinc.com/xarch
 
 go 1.24.6
 
@@ -10,12 +10,12 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/labstack/echo/v4 v4.13.4
 	github.com/redis/go-redis/v9 v9.7.0
-	github.com/risoftinc/goenv v1.1.0
-	github.com/risoftinc/gologger v1.1.0
-	github.com/risoftinc/goresponse v0.0.0-20250908103302-faef7b67f336
-	github.com/risoftinc/goseeder v1.0.0
 	go.mongodb.org/mongo-driver v1.17.1
 	go.risoftinc.com/elsa v0.0.0-20250911163010-0cea0c27cca2
+	go.risoftinc.com/goenv v1.1.1
+	go.risoftinc.com/gologger v1.2.0
+	go.risoftinc.com/goresponse v1.0.0
+	go.risoftinc.com/goseeder v1.2.0
 	golang.org/x/crypto v0.41.0
 	google.golang.org/grpc v1.75.0
 	google.golang.org/protobuf v1.36.9

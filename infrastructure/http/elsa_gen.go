@@ -9,16 +9,16 @@ package http
 import (
 	"go.risoftinc.com/elsa"
 
-	config "github.com/risoftinc/xarch/config"
-	gologger "github.com/risoftinc/gologger"
+	config "go.risoftinc.com/xarch/config"
+	gologger "go.risoftinc.com/gologger"
 	gorm "gorm.io/gorm"
-	healthHandler "github.com/risoftinc/xarch/infrastructure/http/handler/health"
-	healthRepo "github.com/risoftinc/xarch/domain/repositories/health"
-	healthSvc "github.com/risoftinc/xarch/domain/services/health"
-	mid "github.com/risoftinc/xarch/infrastructure/http/middleware"
+	healthHandler "go.risoftinc.com/xarch/infrastructure/http/handler/health"
+	healthRepo "go.risoftinc.com/xarch/domain/repositories/health"
+	healthSvc "go.risoftinc.com/xarch/domain/services/health"
+	mid "go.risoftinc.com/xarch/infrastructure/http/middleware"
 )
 
-// This file generated from dep_manager.go at 2025-09-11T23:41:17+07:00
+// This file generated from dep_manager.go at 2025-09-12T06:28:05+07:00
 
 type Dependencies struct {
 	Middlewares    mid.IContextMiddleware

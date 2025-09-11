@@ -3,10 +3,10 @@ package health
 import (
 	"context"
 
-	"github.com/risoftinc/gologger"
-	healthServices "github.com/risoftinc/xarch/domain/services/health"
-	"github.com/risoftinc/xarch/infrastructure/grpc/entities"
-	healthpb "github.com/risoftinc/xarch/infrastructure/grpc/proto"
+	"go.risoftinc.com/gologger"
+	healthServices "go.risoftinc.com/xarch/domain/services/health"
+	"go.risoftinc.com/xarch/infrastructure/grpc/entities"
+	healthpb "go.risoftinc.com/xarch/infrastructure/grpc/proto"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

@@ -4,9 +4,9 @@ import (
 	"context"
 	"strings"
 
-	"github.com/risoftinc/gologger"
-	healthModels "github.com/risoftinc/xarch/domain/models/health"
-	healthRepositories "github.com/risoftinc/xarch/domain/repositories/health"
+	"go.risoftinc.com/gologger"
+	healthModels "go.risoftinc.com/xarch/domain/models/health"
+	healthRepositories "go.risoftinc.com/xarch/domain/repositories/health"
 )
 
 type (

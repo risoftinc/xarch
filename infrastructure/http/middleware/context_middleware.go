@@ -3,9 +3,9 @@ package middleware
 import (
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
-	"github.com/risoftinc/gologger"
-	"github.com/risoftinc/goresponse"
-	"github.com/risoftinc/xarch/constant"
+	"go.risoftinc.com/gologger"
+	"go.risoftinc.com/goresponse"
+	"go.risoftinc.com/xarch/constant"
 )
 
 const (

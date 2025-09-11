@@ -11,7 +11,7 @@ import (
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 
-	"github.com/risoftinc/xarch/config"
+	"go.risoftinc.com/xarch/config"
 )
 
 // ConnectDB creates a database connection based on the database type

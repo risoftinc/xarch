@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/go-faker/faker/v4"
-	"github.com/risoftinc/xarch/utils/bcrypt"
+	"go.risoftinc.com/xarch/utils/bcrypt"
 )
 
 // User seeding constants
