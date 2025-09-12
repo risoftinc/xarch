@@ -5,6 +5,8 @@ import (
 	"strings"
 
 	"go.risoftinc.com/gologger"
+	"go.risoftinc.com/goresponse"
+	"go.risoftinc.com/xarch/constant"
 	healthModels "go.risoftinc.com/xarch/domain/models/health"
 	healthRepositories "go.risoftinc.com/xarch/domain/repositories/health"
 )
@@ -38,49 +40,52 @@ func (svc HealthServices) HealthMetric(ctx context.Context) (*healthModels.Healt
 	databaseHealth, err := svc.healthRepositories.DatabaseHealth(ctx)
 	if err != nil {
 		metric.Status["database"] = "disconnected"
-
-		return metric, err
-	} else {
-		metric.Status["database"] = "connected"
-		metric.DB = databaseHealth
+		svc.logger.WithContext(ctx).Error("Error database health").ErrorData(err).Send()
+		return metric, goresponse.NewResponseBuilder(categorizeError(err)).
+			WithContext(ctx).
+			SetError(err).
+			ToError()
 	}
+
+	metric.Status["database"] = "connected"
+	metric.DB = databaseHealth
 
 	return metric, nil
 }
 
-func categorizeError(err error) (string, int, int) {
+func categorizeError(err error) string {
 	errMsg := strings.ToLower(err.Error())
 
 	// Connection errors -> 503/UNAVAILABLE
 	if strings.Contains(errMsg, "connection refused") {
-		return "CONNECTION_REFUSED", 503, 14
+		return constant.ErrorConnectionRefused
 	}
 	if strings.Contains(errMsg, "too many connections") {
-		return "TOO_MANY_CONNECTIONS", 503, 14
+		return constant.ErrorTooManyConnections
 	}
 	if strings.Contains(errMsg, "timeout") {
-		return "CONNECTION_TIMEOUT", 503, 14
+		return constant.ErrorConnectionTimeout
 	}
 	if strings.Contains(errMsg, "no such host") {
-		return "DNS_ERROR", 503, 14
+		return constant.ErrorDnsError
 	}
 
 	// Auth errors -> 401/UNAUTHENTICATED
 	if strings.Contains(errMsg, "authentication failed") {
-		return "AUTH_FAILED", 401, 16
+		return constant.ErrorAuthFailed
 	}
 	if strings.Contains(errMsg, "access denied") {
-		return "ACCESS_DENIED", 401, 16
+		return constant.ErrorAccessDenied
 	}
 
 	// Internal errors -> 500/INTERNAL
 	if strings.Contains(errMsg, "driver") {
-		return "DRIVER_ERROR", 500, 13
+		return constant.ErrorDriverError
 	}
 	if strings.Contains(errMsg, "ssl") || strings.Contains(errMsg, "tls") {
-		return "SSL_TLS_ERROR", 500, 13
+		return constant.ErrorSslTlsError
 	}
 
 	// Default -> 500/INTERNAL
-	return "UNKNOWN_ERROR", 500, 13
+	return constant.ErrorInternalServer
 }

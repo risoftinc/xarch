@@ -18,7 +18,7 @@ import (
 	mid "go.risoftinc.com/xarch/infrastructure/grpc/middleware"
 )
 
-// This file generated from dep_manager.go at 2025-09-12T06:28:01+07:00
+// This file generated from dep_manager.go at 2025-09-12T18:18:34+07:00
 
 type Dependencies struct {
 	Middlewares    mid.IContextMiddleware

@@ -22,7 +22,7 @@ type App struct {
 	Config          config.Config
 	Logger          gologger.Logger
 	DB              *gorm.DB
-	ResponseManager *goresponse.ResponseConfig
+	ResponseManager *goresponse.AsyncConfigManager
 }
 
 func Start(app App, wg *sync.WaitGroup) {
@@ -30,7 +30,7 @@ func Start(app App, wg *sync.WaitGroup) {
 	go func() {
 		defer wg.Done()
 		// Initialize HTTP server
-		e := router.Routers(dep.InitializeServices(app.DB, app.Config, app.Logger))
+		e := router.Routers(dep.InitializeServices(app.DB, app.Config, app.Logger, app.ResponseManager))
 
 		// Start HTTP server in background
 		go func() {

@@ -54,6 +54,7 @@ func main() {
 		LogLevel:     cfg.Logger.LogLevel,
 		LogDir:       cfg.Logger.LogDir,
 		RequestIDKey: "traceID",
+		ShowCaller:   true,
 	})
 	defer logger.Close()
 
@@ -65,7 +66,7 @@ func main() {
 		Config:          cfg,
 		Logger:          logger,
 		DB:              db,
-		ResponseManager: responseManager.GetConfig(),
+		ResponseManager: responseManager,
 	}, &wg)
 
 	// Start GRPC server
@@ -73,7 +74,7 @@ func main() {
 		Config:          cfg,
 		Logger:          logger,
 		DB:              db,
-		ResponseManager: responseManager.GetConfig(),
+		ResponseManager: responseManager,
 	}, &wg)
 
 	// Wait for both servers to complete

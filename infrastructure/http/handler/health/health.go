@@ -1,10 +1,10 @@
 package health
 
 import (
-	"net/http"
-
 	"github.com/labstack/echo/v4"
 	"go.risoftinc.com/gologger"
+	"go.risoftinc.com/goresponse"
+	"go.risoftinc.com/xarch/constant"
 	healthServices "go.risoftinc.com/xarch/domain/services/health"
 	"go.risoftinc.com/xarch/infrastructure/http/entities"
 )
@@ -15,13 +15,19 @@ type (
 	}
 	HealthHandler struct {
 		logger         gologger.Logger
+		entities       entities.IEntities
 		healthServices healthServices.IHealthServices
 	}
 )
 
-func NewHealthHandlers(logger gologger.Logger, healthServices healthServices.IHealthServices) IHealthHandler {
+func NewHealthHandlers(
+	logger gologger.Logger,
+	entities entities.IEntities,
+	healthServices healthServices.IHealthServices,
+) IHealthHandler {
 	return &HealthHandler{
 		logger:         logger,
+		entities:       entities,
 		healthServices: healthServices,
 	}
 }
@@ -33,12 +39,11 @@ func (handler HealthHandler) Metric(ctx echo.Context) error {
 
 	metric, err := handler.healthServices.HealthMetric(ctxReq)
 	if err != nil {
-		return ctx.JSON(entities.ResponseFormater(ctx, http.StatusInternalServerError, map[string]interface{}{
-			"error": err.Error(),
-		}))
+		return handler.entities.ResponseFormaterError(ctx, err)
 	}
 
-	return ctx.JSON(entities.ResponseFormater(ctx, http.StatusOK, map[string]interface{}{
-		"data": metric,
-	}))
+	return handler.entities.ResponseFormater(ctx,
+		goresponse.NewResponseBuilder(constant.IsResponseSuccess).
+			WithContext(ctxReq).SetData("data", metric),
+	)
 }
