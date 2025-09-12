@@ -8,7 +8,7 @@ type Response struct {
 type Meta struct {
 	Message         string            `json:"message"`
 	Error           string            `json:"error,omitempty"`
-	Pagination      Pagination        `json:"pagination,omitempty"`
+	Pagination      Pagination        `json:"pagination,omitzero"`
 	ErrorValidation map[string]string `json:"error_validation,omitempty"`
 }
 

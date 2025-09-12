@@ -2,7 +2,6 @@ package health
 
 import (
 	"context"
-	"errors"
 	"strings"
 
 	"go.risoftinc.com/gologger"
@@ -39,9 +38,6 @@ func (svc HealthServices) HealthMetric(ctx context.Context) (*healthModels.Healt
 
 	// Check database health
 	databaseHealth, err := svc.healthRepositories.DatabaseHealth(ctx)
-
-	err = errors.New("access denied")
-
 	if err != nil {
 		metric.Status["database"] = "disconnected"
 		svc.logger.WithContext(ctx).Error("Error database health").ErrorData(err).Send()
