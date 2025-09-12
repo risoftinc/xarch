@@ -22,7 +22,7 @@ type App struct {
 	Config          config.Config
 	Logger          gologger.Logger
 	DB              *gorm.DB
-	ResponseManager *goresponse.ResponseConfig
+	ResponseManager *goresponse.AsyncConfigManager
 }
 
 func StartGRPC(app App, wg *sync.WaitGroup) {

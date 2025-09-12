@@ -66,7 +66,7 @@ func main() {
 		Config:          cfg,
 		Logger:          logger,
 		DB:              db,
-		ResponseManager: responseManager.GetConfig(),
+		ResponseManager: responseManager,
 	}, &wg)
 
 	// Start GRPC server
@@ -74,7 +74,7 @@ func main() {
 		Config:          cfg,
 		Logger:          logger,
 		DB:              db,
-		ResponseManager: responseManager.GetConfig(),
+		ResponseManager: responseManager,
 	}, &wg)
 
 	// Wait for both servers to complete
