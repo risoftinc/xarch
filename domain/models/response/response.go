@@ -1,8 +1,9 @@
 package response
 
 type Response struct {
-	Meta Meta        `json:"meta,omitempty"`
-	Data interface{} `json:"data,omitempty"`
+	Code int  `json:"-"`
+	Meta Meta `json:"meta,omitzero"`
+	Data any  `json:"data,omitempty"`
 }
 
 type Meta struct {

@@ -17,17 +17,20 @@ message HealthMetricRequest {
 
 // Response message for health metric
 message HealthMetricResponse {
-  // Status code (HTTP-like status codes)
-  int32 status = 1;
-  
-  // Response message
-  string message = 2;
+  // Meta information
+  Meta meta = 1;
   
   // Health metric data
-  HealthMetricData data = 3;
+  optional HealthMetricData data = 2;
+}
+
+// Meta information structure
+message Meta {
+  // Response message
+  string message = 1;
   
   // Error information (if any)
-  string error = 4;
+  optional string error = 2;
 }
 
 // Health metric data structure

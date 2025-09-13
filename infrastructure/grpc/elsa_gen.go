@@ -10,7 +10,9 @@ import (
 	"go.risoftinc.com/elsa"
 
 	config "go.risoftinc.com/xarch/config"
+	entities "go.risoftinc.com/xarch/infrastructure/grpc/entities"
 	gologger "go.risoftinc.com/gologger"
+	goresponse "go.risoftinc.com/goresponse"
 	gorm "gorm.io/gorm"
 	healthHandler "go.risoftinc.com/xarch/infrastructure/grpc/handler/health"
 	healthRepo "go.risoftinc.com/xarch/domain/repositories/health"
@@ -18,20 +20,21 @@ import (
 	mid "go.risoftinc.com/xarch/infrastructure/grpc/middleware"
 )
 
-// This file generated from dep_manager.go at 2025-09-12T18:18:34+07:00
+// This file generated from dep_manager.go at 2025-09-12T22:31:31+07:00
 
 type Dependencies struct {
 	Middlewares    mid.IContextMiddleware
 	HealthHandlers healthHandler.HealthHandler
 }
 
-func InitializeServices(db *gorm.DB, cfg config.Config, logger gologger.Logger) *Dependencies {
+func InitializeServices(db *gorm.DB, cfg config.Config, logger gologger.Logger, async *goresponse.AsyncConfigManager) *Dependencies {
 	iHealthRepositories := healthRepo.NewHealthRepositories(db)
 	iHealthServices := healthSvc.NewHealthService(logger, iHealthRepositories)
-	healthHandler := healthHandler.NewHealthHandlers(logger, iHealthServices)
+	iGrpcEntities := entities.NewGrpcEntities(async)
 	iContextMiddleware := mid.NewContextMiddleware(logger)
+	healthHandler := healthHandler.NewHealthHandlers(logger, iGrpcEntities, iHealthServices)
 
-	elsa.Generate(iHealthRepositories, iHealthServices, healthHandler, iContextMiddleware)
+	elsa.Generate(iHealthRepositories, iHealthServices, iGrpcEntities, iContextMiddleware, healthHandler)
 	return &Dependencies{
 		Middlewares:    iContextMiddleware,
 		HealthHandlers: *healthHandler,
