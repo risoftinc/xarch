@@ -30,7 +30,7 @@ func StartGRPC(app App, wg *sync.WaitGroup) {
 	go func() {
 		defer wg.Done()
 		// Initialize dependencies
-		dependencies := dep.InitializeServices(app.DB, app.Config, app.Logger)
+		dependencies := dep.InitializeServices(app.DB, app.Config, app.Logger, app.ResponseManager)
 
 		// Register services
 		grpcServer := router.RegisterGRPCServices(dependencies)

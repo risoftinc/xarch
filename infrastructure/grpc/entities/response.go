@@ -1,71 +1,88 @@
 package entities
 
 import (
-	"context"
-
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
+	"go.risoftinc.com/goresponse"
+	"go.risoftinc.com/xarch/constant"
+	"go.risoftinc.com/xarch/domain/models/response"
 )
 
-// Response represents a gRPC response structure
-type Response struct {
-	Status           int32       `json:"status"`
-	Message          string      `json:"message"`
-	Meta             interface{} `json:"meta,omitempty"`
-	Data             interface{} `json:"data,omitempty"`
-	Error            string      `json:"error,omitempty"`
-	ValidationErrors interface{} `json:"validation_errors,omitempty"`
-}
-
-// ResponseFormater formats the response for gRPC
-func ResponseFormater(ctx context.Context, statusCode int32, data map[string]interface{}) (*Response, error) {
-	response := &Response{
-		Status:  statusCode,
-		Message: GetGRPCStatus(statusCode).String(),
-		Meta:    data["meta"],
-		Data:    data["data"],
-		Error:   "",
+// IGrpcEntities interface for gRPC response formatting
+type (
+	IGrpcEntities interface {
+		ResponseFormaterError(err error) *response.Response
+		ResponseFormater(res *goresponse.ResponseBuilder) *response.Response
 	}
 
-	if data["error"] != nil {
-		if errStr, ok := data["error"].(string); ok {
-			response.Error = errStr
+	// GrpcEntities struct for gRPC response handling
+	GrpcEntities struct {
+		async    *goresponse.AsyncConfigManager
+		response *goresponse.ResponseConfig
+	}
+)
+
+// NewGrpcEntities creates a new gRPC entities instance
+func NewGrpcEntities(async *goresponse.AsyncConfigManager) IGrpcEntities {
+	e := &GrpcEntities{
+		async:    async,
+		response: async.GetConfig(),
+	}
+
+	async.AddCallback(func(oldConfig, newConfig *goresponse.ResponseConfig) {
+		e.response = newConfig
+	})
+
+	return e
+}
+
+// ResponseFormaterError handles error responses for gRPC
+func (e *GrpcEntities) ResponseFormaterError(err error) *response.Response {
+	var rb *goresponse.ResponseBuilder
+	res, ok := goresponse.ParseResponseBuilderError(err)
+	if !ok {
+		rb = goresponse.NewResponseBuilder(constant.ErrorInternalServer).SetError(err)
+	} else {
+		rb = res
+	}
+
+	resBuild, err := e.response.BuildResponse(rb)
+	if err != nil {
+		return &response.Response{
+			Code: resBuild.Code,
+			Meta: response.Meta{
+				Message: "Internal Server Error",
+				Error:   err.Error(),
+			},
 		}
 	}
 
-	if data["validation_errors"] != nil {
-		response.ValidationErrors = data["validation_errors"]
-	}
-
-	return response, nil
-}
-
-// GetGRPCStatus converts HTTP status to gRPC status
-func GetGRPCStatus(httpStatus int32) codes.Code {
-	switch {
-	case httpStatus >= 200 && httpStatus < 300:
-		return codes.OK
-	case httpStatus == 400:
-		return codes.InvalidArgument
-	case httpStatus == 401:
-		return codes.Unauthenticated
-	case httpStatus == 403:
-		return codes.PermissionDenied
-	case httpStatus == 404:
-		return codes.NotFound
-	case httpStatus == 409:
-		return codes.AlreadyExists
-	case httpStatus == 422:
-		return codes.InvalidArgument
-	case httpStatus >= 500:
-		return codes.Internal
-	default:
-		return codes.Unknown
+	return &response.Response{
+		Code: resBuild.Code,
+		Meta: response.Meta{
+			Message: resBuild.Message,
+			Error:   resBuild.Error.Error(),
+		},
 	}
 }
 
-// CreateGRPCError creates a gRPC error from HTTP status and message
-func CreateGRPCError(httpStatus int32, message string) error {
-	grpcCode := GetGRPCStatus(httpStatus)
-	return status.Errorf(grpcCode, message)
+// ResponseFormater handles success responses for gRPC
+func (e *GrpcEntities) ResponseFormater(res *goresponse.ResponseBuilder) *response.Response {
+	resBuild, err := e.response.BuildResponse(res)
+	if err != nil {
+		return &response.Response{
+			Code: resBuild.Code,
+			Meta: response.Meta{
+				Message: "OK",
+				Error:   err.Error(),
+			},
+			Data: res.Data,
+		}
+	}
+
+	return &response.Response{
+		Code: resBuild.Code,
+		Meta: response.Meta{
+			Message: resBuild.Message,
+		},
+		Data: resBuild.Data["data"],
+	}
 }

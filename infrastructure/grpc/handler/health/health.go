@@ -4,6 +4,8 @@ import (
 	"context"
 
 	"go.risoftinc.com/gologger"
+	"go.risoftinc.com/goresponse"
+	"go.risoftinc.com/xarch/constant"
 	healthServices "go.risoftinc.com/xarch/domain/services/health"
 	"go.risoftinc.com/xarch/infrastructure/grpc/entities"
 	healthpb "go.risoftinc.com/xarch/infrastructure/grpc/proto"
@@ -15,34 +17,39 @@ type (
 	HealthHandler struct {
 		healthpb.UnimplementedHealthServiceServer
 		logger         gologger.Logger
+		grpcEntities   entities.IGrpcEntities
 		healthServices healthServices.IHealthServices
 	}
 )
 
-func NewHealthHandlers(logger gologger.Logger, healthServices healthServices.IHealthServices) *HealthHandler {
+func NewHealthHandlers(
+	logger gologger.Logger,
+	grpcEntities entities.IGrpcEntities,
+	healthServices healthServices.IHealthServices,
+) *HealthHandler {
 	return &HealthHandler{
 		logger:         logger,
+		grpcEntities:   grpcEntities,
 		healthServices: healthServices,
 	}
 }
 
 func (handler HealthHandler) GetHealthMetric(ctx context.Context, req *healthpb.HealthMetricRequest) (*healthpb.HealthMetricResponse, error) {
-	// Get request ID and language from context (set by middleware)
-
 	handler.logger.WithContext(ctx).Info("Health Check Request started").Send()
 
 	metric, err := handler.healthServices.HealthMetric(ctx)
 	if err != nil {
 		handler.logger.WithContext(ctx).Error("Health check failed: " + err.Error()).Send()
 
-		// Create error response
-		response := &healthpb.HealthMetricResponse{
-			Status:  14,
-			Message: entities.GetResponseCodeMessage(500),
-			Error:   err.Error(),
-		}
+		// Use gRPC response formatter for error
+		grpcResponse := handler.grpcEntities.ResponseFormaterError(err)
 
-		return response, status.Errorf(codes.Internal, "Health check failed: %v", err)
+		return &healthpb.HealthMetricResponse{
+			Meta: &healthpb.Meta{
+				Message: grpcResponse.Meta.Message,
+				Error:   &grpcResponse.Meta.Error, // Will be nil if no error, so field won't appear in JSON
+			},
+		}, status.Errorf(codes.Internal, "%s", grpcResponse.Meta.Message)
 	}
 
 	// Convert health metric to protobuf format
@@ -55,11 +62,25 @@ func (handler HealthHandler) GetHealthMetric(ctx context.Context, req *healthpb.
 		}
 	}
 
-	// Create database info
+	// Use goresponse for success response
+	responseBuilder := goresponse.NewResponseBuilder(constant.IsResponseSuccess).
+		WithContext(ctx).SetData("data", metric)
 
+	// Use gRPC response formatter for success
+	grpcResponse := handler.grpcEntities.ResponseFormater(responseBuilder)
+
+	// Only set error if it's not empty (for success case, error should be nil)
+	var errorPtr *string
+	if grpcResponse.Meta.Error != "" {
+		errorPtr = &grpcResponse.Meta.Error
+	}
+
+	// Convert to protobuf response with new structure
 	response := &healthpb.HealthMetricResponse{
-		Status:  0,
-		Message: entities.GetResponseCodeMessage(200),
+		Meta: &healthpb.Meta{
+			Message: grpcResponse.Meta.Message,
+			Error:   errorPtr, // Will be nil for success, so field won't appear in JSON
+		},
 		Data: &healthpb.HealthMetricData{
 			Status: statusMap,
 			Database: &healthpb.DatabaseInfo{

@@ -61,14 +61,10 @@ func (*HealthMetricRequest) Descriptor() ([]byte, []int) {
 // Response message for health metric
 type HealthMetricResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Status code (HTTP-like status codes)
-	Status int32 `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
-	// Response message
-	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	// Meta information
+	Meta *Meta `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
 	// Health metric data
-	Data *HealthMetricData `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
-	// Error information (if any)
-	Error         string `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Data          *HealthMetricData `protobuf:"bytes,2,opt,name=data,proto3,oneof" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -103,18 +99,11 @@ func (*HealthMetricResponse) Descriptor() ([]byte, []int) {
 	return file_infrastructure_grpc_proto_health_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *HealthMetricResponse) GetStatus() int32 {
+func (x *HealthMetricResponse) GetMeta() *Meta {
 	if x != nil {
-		return x.Status
+		return x.Meta
 	}
-	return 0
-}
-
-func (x *HealthMetricResponse) GetMessage() string {
-	if x != nil {
-		return x.Message
-	}
-	return ""
+	return nil
 }
 
 func (x *HealthMetricResponse) GetData() *HealthMetricData {
@@ -124,9 +113,57 @@ func (x *HealthMetricResponse) GetData() *HealthMetricData {
 	return nil
 }
 
-func (x *HealthMetricResponse) GetError() string {
+// Meta information structure
+type Meta struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Response message
+	Message string `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	// Error information (if any)
+	Error         *string `protobuf:"bytes,2,opt,name=error,proto3,oneof" json:"error,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Meta) Reset() {
+	*x = Meta{}
+	mi := &file_infrastructure_grpc_proto_health_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Meta) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Meta) ProtoMessage() {}
+
+func (x *Meta) ProtoReflect() protoreflect.Message {
+	mi := &file_infrastructure_grpc_proto_health_proto_msgTypes[2]
 	if x != nil {
-		return x.Error
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Meta.ProtoReflect.Descriptor instead.
+func (*Meta) Descriptor() ([]byte, []int) {
+	return file_infrastructure_grpc_proto_health_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Meta) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *Meta) GetError() string {
+	if x != nil && x.Error != nil {
+		return *x.Error
 	}
 	return ""
 }
@@ -144,7 +181,7 @@ type HealthMetricData struct {
 
 func (x *HealthMetricData) Reset() {
 	*x = HealthMetricData{}
-	mi := &file_infrastructure_grpc_proto_health_proto_msgTypes[2]
+	mi := &file_infrastructure_grpc_proto_health_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -156,7 +193,7 @@ func (x *HealthMetricData) String() string {
 func (*HealthMetricData) ProtoMessage() {}
 
 func (x *HealthMetricData) ProtoReflect() protoreflect.Message {
-	mi := &file_infrastructure_grpc_proto_health_proto_msgTypes[2]
+	mi := &file_infrastructure_grpc_proto_health_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -169,7 +206,7 @@ func (x *HealthMetricData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HealthMetricData.ProtoReflect.Descriptor instead.
 func (*HealthMetricData) Descriptor() ([]byte, []int) {
-	return file_infrastructure_grpc_proto_health_proto_rawDescGZIP(), []int{2}
+	return file_infrastructure_grpc_proto_health_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *HealthMetricData) GetStatus() map[string]string {
@@ -205,7 +242,7 @@ type DatabaseInfo struct {
 
 func (x *DatabaseInfo) Reset() {
 	*x = DatabaseInfo{}
-	mi := &file_infrastructure_grpc_proto_health_proto_msgTypes[3]
+	mi := &file_infrastructure_grpc_proto_health_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -217,7 +254,7 @@ func (x *DatabaseInfo) String() string {
 func (*DatabaseInfo) ProtoMessage() {}
 
 func (x *DatabaseInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_infrastructure_grpc_proto_health_proto_msgTypes[3]
+	mi := &file_infrastructure_grpc_proto_health_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -230,7 +267,7 @@ func (x *DatabaseInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DatabaseInfo.ProtoReflect.Descriptor instead.
 func (*DatabaseInfo) Descriptor() ([]byte, []int) {
-	return file_infrastructure_grpc_proto_health_proto_rawDescGZIP(), []int{3}
+	return file_infrastructure_grpc_proto_health_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DatabaseInfo) GetMaxOpenConnections() int32 {
@@ -301,12 +338,15 @@ var File_infrastructure_grpc_proto_health_proto protoreflect.FileDescriptor
 const file_infrastructure_grpc_proto_health_proto_rawDesc = "" +
 	"\n" +
 	"&infrastructure/grpc/proto/health.proto\x12\x06health\"\x15\n" +
-	"\x13HealthMetricRequest\"\x8c\x01\n" +
-	"\x14HealthMetricResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\x05R\x06status\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12,\n" +
-	"\x04data\x18\x03 \x01(\v2\x18.health.HealthMetricDataR\x04data\x12\x14\n" +
-	"\x05error\x18\x04 \x01(\tR\x05error\"\xbd\x01\n" +
+	"\x13HealthMetricRequest\"t\n" +
+	"\x14HealthMetricResponse\x12 \n" +
+	"\x04meta\x18\x01 \x01(\v2\f.health.MetaR\x04meta\x121\n" +
+	"\x04data\x18\x02 \x01(\v2\x18.health.HealthMetricDataH\x00R\x04data\x88\x01\x01B\a\n" +
+	"\x05_data\"E\n" +
+	"\x04Meta\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\x12\x19\n" +
+	"\x05error\x18\x02 \x01(\tH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\x06_error\"\xbd\x01\n" +
 	"\x10HealthMetricData\x12<\n" +
 	"\x06status\x18\x01 \x03(\v2$.health.HealthMetricData.StatusEntryR\x06status\x120\n" +
 	"\bdatabase\x18\x02 \x01(\v2\x14.health.DatabaseInfoR\bdatabase\x1a9\n" +
@@ -338,25 +378,27 @@ func file_infrastructure_grpc_proto_health_proto_rawDescGZIP() []byte {
 	return file_infrastructure_grpc_proto_health_proto_rawDescData
 }
 
-var file_infrastructure_grpc_proto_health_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_infrastructure_grpc_proto_health_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_infrastructure_grpc_proto_health_proto_goTypes = []any{
 	(*HealthMetricRequest)(nil),  // 0: health.HealthMetricRequest
 	(*HealthMetricResponse)(nil), // 1: health.HealthMetricResponse
-	(*HealthMetricData)(nil),     // 2: health.HealthMetricData
-	(*DatabaseInfo)(nil),         // 3: health.DatabaseInfo
-	nil,                          // 4: health.HealthMetricData.StatusEntry
+	(*Meta)(nil),                 // 2: health.Meta
+	(*HealthMetricData)(nil),     // 3: health.HealthMetricData
+	(*DatabaseInfo)(nil),         // 4: health.DatabaseInfo
+	nil,                          // 5: health.HealthMetricData.StatusEntry
 }
 var file_infrastructure_grpc_proto_health_proto_depIdxs = []int32{
-	2, // 0: health.HealthMetricResponse.data:type_name -> health.HealthMetricData
-	4, // 1: health.HealthMetricData.status:type_name -> health.HealthMetricData.StatusEntry
-	3, // 2: health.HealthMetricData.database:type_name -> health.DatabaseInfo
-	0, // 3: health.HealthService.GetHealthMetric:input_type -> health.HealthMetricRequest
-	1, // 4: health.HealthService.GetHealthMetric:output_type -> health.HealthMetricResponse
-	4, // [4:5] is the sub-list for method output_type
-	3, // [3:4] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	2, // 0: health.HealthMetricResponse.meta:type_name -> health.Meta
+	3, // 1: health.HealthMetricResponse.data:type_name -> health.HealthMetricData
+	5, // 2: health.HealthMetricData.status:type_name -> health.HealthMetricData.StatusEntry
+	4, // 3: health.HealthMetricData.database:type_name -> health.DatabaseInfo
+	0, // 4: health.HealthService.GetHealthMetric:input_type -> health.HealthMetricRequest
+	1, // 5: health.HealthService.GetHealthMetric:output_type -> health.HealthMetricResponse
+	5, // [5:6] is the sub-list for method output_type
+	4, // [4:5] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_infrastructure_grpc_proto_health_proto_init() }
@@ -364,13 +406,15 @@ func file_infrastructure_grpc_proto_health_proto_init() {
 	if File_infrastructure_grpc_proto_health_proto != nil {
 		return
 	}
+	file_infrastructure_grpc_proto_health_proto_msgTypes[1].OneofWrappers = []any{}
+	file_infrastructure_grpc_proto_health_proto_msgTypes[2].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infrastructure_grpc_proto_health_proto_rawDesc), len(file_infrastructure_grpc_proto_health_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
