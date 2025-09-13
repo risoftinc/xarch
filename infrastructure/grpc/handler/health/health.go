@@ -9,7 +9,7 @@ import (
 	healthServices "go.risoftinc.com/xarch/domain/services/health"
 	"go.risoftinc.com/xarch/infrastructure/grpc/entities"
 	healthpb "go.risoftinc.com/xarch/infrastructure/grpc/proto"
-	"google.golang.org/grpc/codes"
+	"go.risoftinc.com/xarch/utils/grpc"
 	"google.golang.org/grpc/status"
 )
 
@@ -49,7 +49,7 @@ func (handler HealthHandler) GetHealthMetric(ctx context.Context, req *healthpb.
 				Message: grpcResponse.Meta.Message,
 				Error:   &grpcResponse.Meta.Error, // Will be nil if no error, so field won't appear in JSON
 			},
-		}, status.Errorf(codes.Internal, "%s", grpcResponse.Meta.Message)
+		}, status.Errorf(grpc.IntToCode(grpcResponse.Code), "%s", grpcResponse.Meta.Message)
 	}
 
 	// Convert health metric to protobuf format
