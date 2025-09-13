@@ -47,7 +47,7 @@ func (e *GrpcEntities) ResponseFormaterError(err error) *response.Response {
 	resBuild, err := e.response.BuildResponse(rb)
 	if err != nil {
 		return &response.Response{
-			Code: resBuild.Code,
+			Code: 13,
 			Meta: response.Meta{
 				Message: "Internal Server Error",
 				Error:   err.Error(),
@@ -69,7 +69,7 @@ func (e *GrpcEntities) ResponseFormater(res *goresponse.ResponseBuilder) *respon
 	resBuild, err := e.response.BuildResponse(res)
 	if err != nil {
 		return &response.Response{
-			Code: resBuild.Code,
+			Code: 0,
 			Meta: response.Meta{
 				Message: "OK",
 				Error:   err.Error(),
