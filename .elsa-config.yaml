@@ -1,13 +1,12 @@
-template:
-  name: xarch
-  git_url: https://github.com/risoftinc/xarch
-
 make:
   dependencies:
     template: dependencies/template.go.tmpl
   seeder:
     template: seeder/template.go.tmpl
     output: database/seeders
+  models:
+    template: models/template.go.tmpl
+    output: domain/models
   repository:
     template: repository/template.go.tmpl
     output: domain/repositories
