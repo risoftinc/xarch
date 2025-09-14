@@ -1,0 +1,22 @@
+template:
+  name: xarch
+  git_url: https://github.com/risoftinc/xarch
+
+make:
+  dependencies:
+    template: dependencies/template.go.tmpl
+  seeder:
+    template: seeder/template.go.tmpl
+    output: database/seeders
+  repository:
+    template: repository/template.go.tmpl
+    output: domain/repositories
+  service:
+    template: service/template.go.tmpl
+    output: domain/services
+  http-handler:
+    template: handler/template-http.go.tmpl
+    output: infrastructure/http/handler
+  grpc-handler:
+    template: handler/template-grpc.go.tmpl
+    output: infrastructure/grpc/handler

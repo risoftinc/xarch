@@ -20,7 +20,7 @@ const (
 )
 
 // User model for seeder
-type User struct {
+type UserSeeder struct {
 	ID        uint    `gorm:"primaryKey"`
 	Username  string  `gorm:"unique;not null"`
 	Password  string  `gorm:"not null"`
@@ -32,12 +32,12 @@ type User struct {
 	UpdatedAt *time.Time `gorm:"autoUpdateTime:false"`
 }
 
-func (User) TableName() string {
+func (UserSeeder) TableName() string {
 	return "users"
 }
 
 // UserSeed seeds user data
-func (s *MainSeeder) UserSeed() error {
+func (s *MainSeeder) UserSeeder() error {
 	log.Println("Seeding users...")
 
 	// Create admin user first
@@ -62,7 +62,7 @@ func (s *MainSeeder) createAdminUser() error {
 		return err
 	}
 
-	adminUser := User{
+	adminUser := UserSeeder{
 		Username:  "admin",
 		Password:  string(hashedPassword),
 		Roles:     defaultAdminRole,
@@ -73,7 +73,7 @@ func (s *MainSeeder) createAdminUser() error {
 
 	// Check if admin already exists
 	var count int64
-	s.db.Model(&User{}).Where("username = ?", adminUser.Username).Count(&count)
+	s.db.Model(&UserSeeder{}).Where("username = ?", adminUser.Username).Count(&count)
 
 	if count == 0 {
 		if err := s.db.Create(&adminUser).Error; err != nil {
@@ -82,7 +82,7 @@ func (s *MainSeeder) createAdminUser() error {
 		log.Printf("Created admin user: %s (ID: %d)", adminUser.Username, adminUser.ID)
 
 		// Update admin's created_by to reference itself
-		if err := s.db.Model(&User{}).Where("id = ?", adminUser.ID).Update("created_by", adminUser.ID).Error; err != nil {
+		if err := s.db.Model(&UserSeeder{}).Where("id = ?", adminUser.ID).Update("created_by", adminUser.ID).Error; err != nil {
 			return err
 		}
 	} else {
@@ -100,7 +100,7 @@ func (s *MainSeeder) createEmployeeUsers() error {
 	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	// Get admin user ID for created_by reference
-	var adminUser User
+	var adminUser UserSeeder
 	if err := s.db.Where("username = ?", "admin").First(&adminUser).Error; err != nil {
 		log.Printf("Warning: Admin user not found, using default created_by: %d", defaultCreatedBy)
 		adminUser.ID = defaultCreatedBy
@@ -139,7 +139,7 @@ func (s *MainSeeder) createEmployeeUsers() error {
 		salary := salaryRange.min + rng.Float64()*(salaryRange.max-salaryRange.min)
 		salary = float64(int(salary))
 
-		employeeUser := User{
+		employeeUser := UserSeeder{
 			Username:  username,
 			Password:  string(hashedPassword),
 			Roles:     defaultEmployeeRole,
@@ -150,7 +150,7 @@ func (s *MainSeeder) createEmployeeUsers() error {
 
 		// Check if user already exists
 		var count int64
-		s.db.Model(&User{}).Where("username = ?", employeeUser.Username).Count(&count)
+		s.db.Model(&UserSeeder{}).Where("username = ?", employeeUser.Username).Count(&count)
 
 		if count == 0 {
 			if err := s.db.Create(&employeeUser).Error; err != nil {
