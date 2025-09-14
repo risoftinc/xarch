@@ -1,0 +1,10 @@
+package {{.PackageName}}
+
+type (
+	I{{.StructName | title}}Service interface{}
+	{{.StructName | title}}Service struct{}
+)
+
+func New{{.StructName | title}}Service() I{{.StructName | title}}Service {
+	return &{{.StructName | title}}Service{}
+}

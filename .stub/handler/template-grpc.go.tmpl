@@ -1,0 +1,11 @@
+package {{.PackageName}}
+
+type (
+	{{.StructName | title}}Handler struct{
+        // Dont Forget to embed gRPC service implementation for {{.StructName | singular}} service in here
+    }
+)
+
+func New{{.StructName | title}}Handler() {{.StructName | title}}Handler {
+	return {{.StructName | title}}Handler{}
+}

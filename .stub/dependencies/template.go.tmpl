@@ -1,0 +1,26 @@
+//go:build elsabuild
+// +build elsabuild
+
+package {{.PackageName}}
+
+import (
+    "go.risoftinc.com/elsa"
+)
+
+type {{.StructName | title}} struct{}
+
+func Initialize{{.StructName | title}}() *{{.StructName | title}} {
+    elsa.Generate(
+        RepositorySet,
+        ServicesSet,
+        HandlerSet,
+    )
+
+	return nil
+}
+
+var RepositorySet = elsa.Set()
+
+var ServicesSet = elsa.Set()
+
+var HandlerSet = elsa.Set()

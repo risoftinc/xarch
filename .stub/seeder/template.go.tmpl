@@ -1,0 +1,18 @@
+package {{.PackageName}}
+
+import (
+    "log"
+)
+
+type {{.StructName | title}} struct{}
+
+func ({{.StructName | title}}) TableName() string {
+	return "{{.StructName | plural}}"
+}
+
+func (s *MainSeeder) {{.StructName | title}}() error {
+	log.Println("Seeding {{.StructName | plural}}...")
+
+	log.Println("{{.StructName | plural}} seeding completed!")
+	return nil
+}

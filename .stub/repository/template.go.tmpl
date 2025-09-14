@@ -1,0 +1,10 @@
+package {{.PackageName}}
+
+type (
+	I{{.StructName | title}}Repositories interface{}
+	{{.StructName | title}}Repositories struct{}
+)
+
+func New{{.StructName | title}}Repositories() I{{.StructName | title}}Repositories {
+	return &{{.StructName | title}}Repositories{}
+}

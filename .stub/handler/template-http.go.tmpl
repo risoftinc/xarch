@@ -1,0 +1,10 @@
+package {{.PackageName}}
+
+type (
+	I{{.StructName | title}}Handler interface{}
+	{{.StructName | title}}Handler struct{}
+)
+
+func New{{.StructName | title}}Handler() I{{.StructName | title}}Handler {
+	return &{{.StructName | title}}Handler{}
+}
