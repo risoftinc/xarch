@@ -1,0 +1,14 @@
+services:
+  xarch-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${HOST_API}:${HOST_API}"
+      - "${HOST_GRPC}:${HOST_GRPC}"
+    env_file:
+      - ${ENV_FILE}
+    volumes:
+      # Mount logs directory if needed
+      - ./logs:/root/logger
+    restart: unless-stopped

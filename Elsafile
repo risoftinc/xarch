@@ -55,3 +55,9 @@ proto:
 make-generate:
 	elsa make list
 	elsa make ${?TEMPLATE_TYPE:Enter your template type} ${?NAME:Enter naming convention}
+
+# Build the project with docker
+docker-build:
+	echo exposed port api  : ${?HOST_API:Enter your host api}
+	echo exposed port grpc : ${?HOST_GRPC:Enter your host grpc}
+	docker-compose --env-file ${?ENV_FILE:Enter your env file} up --build
