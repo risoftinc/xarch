@@ -28,16 +28,30 @@ deps:
 run:
 	go run .
 
+# Run the application in development mode via elsa watch
+run/dev:
+	elsa watch "cls & go run ."
+
 # Format code
 fmt:
 	go fmt ./...
 	go vet ./...
 
+# For Migration
+ddl-create:
+	elsa migration create ddl ${?MIGRATION_NAME:Enter your migration ddl name}
+
+dml-create:
+	elsa migration create dml ${?MIGRATION_NAME:Enter your migration dml name}
+
 seed:
 	go run cmd/seeder/main.go -type=all
 
+# Generate proto files
 proto:
 	protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative infrastructure/grpc/proto/*.proto
 
-run/dev:
-	elsa watch "cls & go run ."
+# For make 
+make-generate:
+	elsa make list
+	elsa make ${?TEMPLATE_TYPE:Enter your template type} ${?NAME:Enter naming convention}
