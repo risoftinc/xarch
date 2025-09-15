@@ -304,26 +304,47 @@ Translation files are located in `config/translations/`.
 
 ### Docker (Recommended)
 
-Create a `Dockerfile`:
+Simple Docker deployment using Elsa CLI:
 
-```dockerfile
-FROM golang:1.24.6-alpine AS builder
+#### Quick Start
 
-WORKDIR /app
-COPY go.mod go.sum ./
-RUN go mod download
+```bash
+# 1. Create Docker environment file
+# Linux/Mac:
+cp .env.example .env.docker
 
-COPY . .
-RUN go build -o main .
+# Windows CMD:
+copy .env.example .env.docker
 
-FROM alpine:latest
-RUN apk --no-cache add ca-certificates
-WORKDIR /root/
+# Windows PowerShell:
+Copy-Item .env.example .env.docker
 
-COPY --from=builder /app/main .
-COPY --from=builder /app/config ./config
+# 2. Edit .env.docker with your configuration
+nano .env.docker  # Linux/Mac
+notepad .env.docker  # Windows
 
-CMD ["./main"]
+# 3. Build and run with Elsa
+elsa docker-build
+```
+
+#### Docker Features
+
+- **Multi-stage Build**: Optimized image size with Alpine Linux
+- **Multi-environment Support**: `.env.docker`, `.env.dev`, `.env.production`
+- **Port Configuration**: Flexible port mapping with environment variables
+- **Security**: Non-root user for running the application
+
+#### Manual Docker Commands
+
+```bash
+# Build and run manually (set ports first)
+HOST_API=9000 HOST_GRPC=9001 docker-compose up --build
+
+# Run with specific environment file
+HOST_API=9000 HOST_GRPC=9001 ENV_FILE=.env.docker docker-compose up --build
+
+# Run with custom ports
+HOST_API=8080 HOST_GRPC=8081 ENV_FILE=.env.docker docker-compose up --build
 ```
 
 ### Manual Deployment
