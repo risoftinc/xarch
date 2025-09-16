@@ -38,11 +38,20 @@ fmt:
 	go vet ./...
 
 # For Migration
+migration-status:
+	elsa migration status
+
 ddl-create:
 	elsa migration create ddl ${?MIGRATION_NAME:Enter your migration ddl name}
 
 dml-create:
 	elsa migration create dml ${?MIGRATION_NAME:Enter your migration dml name}
+
+ddl-run:
+	elsa migration up ddl
+
+dml-run:
+	elsa migration up dml
 
 seed:
 	go run cmd/seeder/main.go -type=all
