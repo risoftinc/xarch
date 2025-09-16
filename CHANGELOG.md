@@ -6,16 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-### Added
 - 
 
 ### Features
 - 
 
-## [1.0.1] - 2025-09-15
+## [1.0.2] - 2025-09-16
 
 ### Added
-- Added `elsa` command for Docker application build
-- Docker support with Dockerfile and docker-compose.yml
-- Multi-environment configuration (.env files)
-- Port mapping with environment variables
+- Added migration management commands:
+  - `migration-status`: Check migration status
+  - `ddl-run`: Execute DDL (Data Definition Language) migrations
+  - `dml-run`: Execute DML (Data Manipulation Language) migrations
